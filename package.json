@@ -1,0 +1,26 @@
+{
+  "name": "bearc-node",
+  "version": "1.0.0",
+  "description": "bearc-node",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunhaoxiang/bearc-node.git"
+  },
+  "author": "孙昊翔 <673686754@qq.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunhaoxiang/bearc-node/issues"
+  },
+  "homepage": "https://github.com/sunhaoxiang/bearc-node#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.4",
+    "mongoose": "^4.11.6",
+    "morgan": "^1.8.2"
+  }
+}
