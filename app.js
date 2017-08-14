@@ -23,14 +23,16 @@ const bodyParser = require('body-parser')
 const http = require('http')
 const url = require('url')
 const querystring = require('querystring')
+const goods = require('./routes/goods')
+const countries = require('./routes/countries')
 
-//搭建服务
+// 搭建服务
 const app = express()
 app.listen(8888, () => {
   console.log('服务已启动')
 });
 
-//允许跨域
+// 允许跨域
 app.all('*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With, yourHeaderFeild')
@@ -44,8 +46,11 @@ app.all('*', function(req, res, next) {
   }
 })
 
-//解析POST数据
+// 解析POST数据
 app.use(bodyParser.urlencoded())
 
-//goods模块路由
-app.use('/goods', require('./routes/goods')())
+// goods模块路由
+app.use('/goods', goods)
+
+// countries模块路由
+app.use('/countries', countries)
