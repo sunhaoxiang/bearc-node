@@ -6,6 +6,7 @@ const productSchema = new Schema({
   productPrice: Number,
   productDiscountPrice: Number,
   productCountry: String,
+  productClass: String,
   hot: Boolean
 })
 

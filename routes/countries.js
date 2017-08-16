@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Countries = require('../models/countries')
 
+// countries模块
 router.get('/', (req, res, next) => {
   Countries.find({}, (err, doc) => {
     if (err) {
