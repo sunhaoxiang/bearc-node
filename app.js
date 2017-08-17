@@ -24,8 +24,8 @@ const bodyParser = require('body-parser')
 const http = require('http')
 const url = require('url')
 const querystring = require('querystring')
-const goods = require('./routes/goods')
-const countries = require('./routes/countries')
+const getGoods = require('./routes/getGoods')
+const getCountries = require('./routes/getCountries')
 
 // 搭建服务
 const app = express()
@@ -65,8 +65,8 @@ app.all('*', function(req, res, next) {
 // 解析POST数据
 app.use(bodyParser.urlencoded())
 
-// goods模块路由
-app.use('/goods', goods)
+// getGoods模块路由
+app.use('/getgoods', getGoods)
 
-// countries模块路由
-app.use('/countries', countries)
+// getCountries模块路由
+app.use('/getcountries', getCountries)

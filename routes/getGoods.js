@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const Goods = require('../models/goods')
+const getGoods = require('../models/getGoods')
 
 // 获取相应分类数据
 router.get('/:productClass', (req, res, next) => {
   if (req.params.productClass === 'hot') {
-    Goods.find({hot: true}, (err, doc) => {
+    getGoods.find({hot: true}, (err, doc) => {
       if (err) {
         res.json({
           status: '1',
@@ -23,7 +23,7 @@ router.get('/:productClass', (req, res, next) => {
       }
     })
   } else {
-    Goods.find({productClass: req.params.productClass}, (err, doc) => {
+    getGoods.find({productClass: req.params.productClass}, (err, doc) => {
       if (err) {
         res.json({
           status: '1',

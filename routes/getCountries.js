@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const Countries = require('../models/countries')
+const getCountries = require('../models/getCountries')
 
-// countries模块
+// 获取国家数据
 router.get('/', (req, res, next) => {
-  Countries.find({}, (err, doc) => {
+  getCountries.find({}, (err, doc) => {
     if (err) {
       res.json({
         status: '1',

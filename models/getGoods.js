@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const productSchema = new Schema({
+const productSchema = new mongoose.Schema({
   productName: String,
   productImgSrc: String,
   productPrice: Number,
@@ -10,4 +9,4 @@ const productSchema = new Schema({
   hot: Boolean
 })
 
-module.exports = mongoose.model('Good', productSchema, 'goods')
+module.exports = mongoose.model('getGoods', productSchema, 'goods')
