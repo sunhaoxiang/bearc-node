@@ -2,46 +2,45 @@ const express = require('express')
 const router = express.Router()
 const Goods = require('../models/goods')
 
-// hot模块
-router.get('/hot', (req, res, next) => {
-  Goods.find({hot: true}, (err, doc) => {
-    if (err) {
-      res.json({
-        status: '1',
-        msg: err.message
-      })
-    } else {
-      res.json({
-        status: '0',
-        msg: '',
-        result: {
-          count: doc.length,
-          list: doc
-        }
-      })
-    }
-  })
-})
-
-// milkpowders模块
-router.get('/milkpowders', (req, res, next) => {
-  Goods.find({productClass: 'milkpowders'}, (err, doc) => {
-    if (err) {
-      res.json({
-        status: '1',
-        msg: err.message
-      })
-    } else {
-      res.json({
-        status: '0',
-        msg: '',
-        result: {
-          count: doc.length,
-          list: doc
-        }
-      })
-    }
-  })
+// 获取相应分类数据
+router.get('/:productClass', (req, res, next) => {
+  if (req.params.productClass === 'hot') {
+    Goods.find({hot: true}, (err, doc) => {
+      if (err) {
+        res.json({
+          status: '1',
+          msg: err.message
+        })
+      } else {
+        res.json({
+          status: '0',
+          msg: '',
+          result: {
+            count: doc.length,
+            list: doc
+          }
+        })
+      }
+    })
+  } else {
+    Goods.find({productClass: req.params.productClass}, (err, doc) => {
+      if (err) {
+        res.json({
+          status: '1',
+          msg: err.message
+        })
+      } else {
+        res.json({
+          status: '0',
+          msg: '',
+          result: {
+            count: doc.length,
+            list: doc
+          }
+        })
+      }
+    })
+  }
 })
 
 module.exports = router
