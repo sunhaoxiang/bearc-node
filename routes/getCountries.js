@@ -3,7 +3,7 @@ const router = express.Router()
 const getCountries = require('../models/getCountries')
 
 // 获取国家数据
-router.get('/', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   getCountries.find({}, (err, doc) => {
     if (err) {
       res.json({
