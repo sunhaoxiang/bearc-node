@@ -9,4 +9,6 @@ const productSchema = new mongoose.Schema({
   hot: Boolean
 })
 
-module.exports = mongoose.model('getGoods', productSchema, 'goods')
+module.exports = function () {
+  return mongoose.model('getGoods', productSchema, 'goods')
+}

@@ -18,8 +18,8 @@
   "homepage": "https://github.com/sunhaoxiang/bearc-node#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "cookie-parser": "^1.4.3",
     "express": "^4.15.4",
+    "jsonwebtoken": "^7.4.3",
     "mongoose": "^4.11.6",
     "morgan": "^1.8.2"
   }

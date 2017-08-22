@@ -3,4 +3,6 @@ const countrySchema = new mongoose.Schema({
   country: String
 })
 
-module.exports = mongoose.model('getCountres', countrySchema, 'countries')
+module.exports = function () {
+  return mongoose.model('getCountres', countrySchema, 'countries')
+}
