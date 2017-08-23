@@ -22,11 +22,11 @@ const http = require('http')
 const url = require('url')
 const querystring = require('querystring')
 const express = require('express')
-const mongoose = require('mongoose')
+const db = require('./db/db')
 const bodyParser = require('body-parser')
-const getGoods = require('./routes/getGoods')
-const getCountries = require('./routes/getCountries')
-const users = require('./routes/users')
+const getCountries = require('./routes/getcountries/getCountries')
+const getGoods = require('./routes/getgoods/getGoods')
+const users = require('./routes/users/users')
 
 // 搭建服务
 const app = express()
@@ -34,20 +34,8 @@ app.listen(9999, () => {
   console.log('Bearc service startup.')
 })
 
-// 连接MongoDB数据库
-mongoose.connect('mongodb://127.0.0.1:27017/bearc', {useMongoClient: true})
-// 连接成功
-mongoose.connection.on('connected', () => {
-  console.log('MongoDB connected success.')
-})
-// 连接异常
-mongoose.connection.on('error', () => {
-  console.log('MongoDB connected fail.')
-})
-// 连接断开
-mongoose.connection.on('disconnected', () => {
-  console.log('MongoDB connected disconnected.')
-})
+// 连接数据库
+db()
 
 // 允许跨域
 app.all('*', function(req, res, next) {

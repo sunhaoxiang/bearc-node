@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const getGoods = require('../models/getGoods')
+const getGoods = require('../../models/getGoods')
 
 module.exports = function () {
   // 获取相应分类数据
@@ -46,5 +46,6 @@ module.exports = function () {
         break;
     }
   })
+  
   return router
 }

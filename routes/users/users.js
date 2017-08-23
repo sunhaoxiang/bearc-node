@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const users = require('../models/users')
+const users = require('../../models/users')
+const jwt = require('../../jwt/jwt')
 
 module.exports = function () {
   // 登录
   router.post('/login', (req, res, next) => {
-    console.log(req.session.id)
     users().find({username: req.body.username}, (err, doc) => {
       if (err) {
         res.json({
@@ -16,17 +16,20 @@ module.exports = function () {
         if (doc.length === 0) {
           res.json({
             status: 2,
-            msg: '账号不存在',
-            result: {}
+            msg: '账号不存在'
           })
         } else {
-          if (req.body.username !== doc[0].password) {
+          if (req.body.password !== doc[0].password) {
             res.json({
               status: 1,
-              msg: '密码错误',
-              result: {}
+              msg: '密码错误'
             })
           } else {
+            let a = jwt.sign(req.body.username)
+            let b = jwt.verify(a)
+            console.log(a)
+            console.log(b)
+            console.log(Math.round(new Date() / 1000))
             res.json({
               status: 0,
               msg: '登陆成功',
@@ -37,5 +40,6 @@ module.exports = function () {
       }
     })
   })
+  
   return router
 }

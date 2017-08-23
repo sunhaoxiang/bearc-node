@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const getCountries = require('../models/countries')
+const getCountries = require('../../models/countries')
 
 module.exports = function () {
   // 获取国家数据
@@ -23,5 +23,6 @@ module.exports = function () {
       }
     })
   })
+  
   return router
 }
