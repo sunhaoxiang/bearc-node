@@ -21,24 +21,54 @@ module.exports = function () {
         } else {
           if (req.body.password !== doc[0].password) {
             res.json({
-              status: 1,
+              status: 3,
               msg: '密码错误'
             })
           } else {
-            let a = jwt.sign(req.body.username)
-            let b = jwt.verify(a)
-            console.log(a)
-            console.log(b)
-            console.log(Math.round(new Date() / 1000))
+            let signToken = jwt.sign(req.body.username)
             res.json({
               status: 0,
               msg: '登陆成功',
-              result: {}
+              result: {
+                username: doc[0].username,
+                token: signToken
+              }
             })
           }
         }
       }
     })
+  })
+
+  // 验证token
+  router.post('/verifyToken', (req, res, next) =>{
+    let verifyToken = jwt.verify(req.body.token)
+    if (verifyToken === 'invalid') {
+      res.json({
+        status: 4,
+        msg: '登录超时'
+      })
+    } else {
+      // token剩余时间
+      let remainTime = verifyToken.exp - Math.round(new Date() / 1000)
+      // 如果token剩余时间大于15分钟，则不更新token
+      if (remainTime > 900) {
+        res.json({
+          status: 0,
+          msg: '验证成功'
+        })
+      // 否则更新token
+      } else {
+        let newToken = jwt.sign(req.body.username)
+        res.json({
+          status: 1,
+          msg: '更新token',
+          result: {
+            newToken: newToken
+          }
+        })
+      }
+    }
   })
   
   return router

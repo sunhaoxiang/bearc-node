@@ -4,7 +4,7 @@ const { jwtSecretKey } = require('../config/config')
 module.exports = {
   // 生成token
   sign (username) {
-    let token = jwt.sign({username: username}, jwtSecretKey, {expiresIn: '30m'})
+    let token = jwt.sign({username: username}, jwtSecretKey, {expiresIn: '1m'})
     return token
   },
   // 验证token
@@ -13,7 +13,7 @@ module.exports = {
       let username = jwt.verify(token, jwtSecretKey)
       return username
     } catch (err) {
-      return err
+      return 'invalid'
     }
   }
 }
