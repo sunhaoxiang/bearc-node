@@ -24,13 +24,14 @@ const querystring = require('querystring')
 const express = require('express')
 const db = require('./db/db')
 const bodyParser = require('body-parser')
+const { port } = require('./config/config')
 const getCountries = require('./routes/getcountries/getCountries')
 const getGoods = require('./routes/getgoods/getGoods')
 const users = require('./routes/users/users')
 
 // 搭建服务
 const app = express()
-app.listen(9999, () => {
+app.listen(port, () => {
   console.log('Bearc service startup.')
 })
 

@@ -55,15 +55,19 @@ module.exports = function () {
       if (remainTime > 900) {
         res.json({
           status: 0,
-          msg: '验证成功'
+          msg: '验证成功',
+          result: {
+            username: verifyToken.username
+          }
         })
       // 否则更新token
       } else {
-        let newToken = jwt.sign(req.body.username)
+        let newToken = jwt.sign(verifyToken.username)
         res.json({
           status: 1,
           msg: '更新token',
           result: {
+            username: verifyToken.username,
             newToken: newToken
           }
         })
