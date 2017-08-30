@@ -25,9 +25,9 @@ const express = require('express')
 const db = require('./db/db')
 const bodyParser = require('body-parser')
 const { port } = require('./config/config')
-const getCountries = require('./routes/getcountries/getCountries')
-const getGoods = require('./routes/getgoods/getGoods')
-const users = require('./routes/users/users')
+const getCountries = require('./routes/getcountries')
+const getGoods = require('./routes/getgoods')
+const users = require('./routes/users')
 
 // 搭建服务
 const app = express()

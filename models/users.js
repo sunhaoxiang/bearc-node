@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
-const loginSchema = new mongoose.Schema({
+const usersSchema = new mongoose.Schema({
   username: String,
   password: String
 })
 
 module.exports = function () {
-  return mongoose.model('users', loginSchema, 'users')
+  return mongoose.model('users', usersSchema, 'users')
 }
