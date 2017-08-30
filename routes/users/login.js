@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const users = require('../../models/users')
 const jwt = require('../../jwt/jwt')
+const md5 = require('../../md5/md5')
 
 module.exports = function () {
   router.post('/', (req, res, next) => {
@@ -18,7 +19,8 @@ module.exports = function () {
             msg: '账号不存在'
           })
         } else {
-          if (req.body.password !== doc[0].password) {
+          let password = md5(req.body.password)
+          if (password !== doc[0].password) {
             res.json({
               status: 3,
               msg: '密码错误'

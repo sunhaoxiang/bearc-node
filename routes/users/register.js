@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const users = require('../../models/users')
+const md5 = require('../../md5/md5')
 
 module.exports = function () {
   router.post('/', (req, res, next) => {
@@ -17,7 +18,8 @@ module.exports = function () {
             msg: '账号已存在'
           })
         } else {
-          users().create({username: req.body.username, password: req.body.password}, (err) => {
+          let password = md5(req.body.password)
+          users().create({username: req.body.username, password: password}, (err) => {
             res.json({
               status: 5,
               msg: '注册成功'
