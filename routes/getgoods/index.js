@@ -1,13 +1,21 @@
 const express = require('express')
 const router = express.Router()
-const getGoods = require('../../models/getGoods')
+const goods = require('../../models/goods')
 
 module.exports = function () {
   // 获取相应分类数据
   router.get('/:productClass', (req, res, next) => {
     switch (req.params.productClass) {
       case 'hot':
-        getGoods().find({hot: true}, (err, doc) => {
+        goods().find({hot: true}, {
+          _id: 0,
+          productName: 1,
+          productImgSrc: 1,
+          productPrice: 1,
+          productDiscountPrice: 1,
+          productCountry: 1,
+          productClass: 1
+        }, (err, doc) => {
           if (err) {
             res.json({
               status: -1,
@@ -24,9 +32,16 @@ module.exports = function () {
             })
           }
         })
-        break;
+        break
       default:
-        getGoods().find({productClass: req.params.productClass}, (err, doc) => {
+        goods().find({productClass: req.params.productClass}, {
+          productName: 1,
+          productImgSrc: 1,
+          productPrice: 1,
+          productDiscountPrice: 1,
+          productCountry: 1,
+          productClass: 1
+        }, (err, doc) => {
           if (err) {
             res.json({
               status: -1,
@@ -43,7 +58,7 @@ module.exports = function () {
             })
           }
         })
-        break;
+        break
     }
   })
   

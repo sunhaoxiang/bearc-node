@@ -1,11 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const getCountries = require('../../models/countries')
+const countries = require('../../models/countries')
 
 module.exports = function () {
   // 获取国家数据
   router.get('/', (req, res, next) => {
-    getCountries().find({}, (err, doc) => {
+    countries().find({}, {
+      _id: 0,
+    }, (err, doc) => {
       if (err) {
         res.json({
           status: -1,
