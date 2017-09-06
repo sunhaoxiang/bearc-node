@@ -9,8 +9,8 @@ module.exports = function () {
     console.log('MongoDB connected success.')
   })
   // 连接异常
-  mongoose.connection.on('error', () => {
-    console.log('MongoDB connected fail.')
+  mongoose.connection.on('error', (err) => {
+    console.log('MongoDB connected error.')
   })
   // 连接断开
   mongoose.connection.on('disconnected', () => {

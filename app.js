@@ -27,6 +27,8 @@ const bodyParser = require('body-parser')
 const { port } = require('./config/config')
 const getCountries = require('./routes/getcountries')
 const getGoods = require('./routes/getgoods')
+const register = require('./routes/register')
+const login = require('./routes/login')
 const users = require('./routes/users')
 
 // 搭建服务
@@ -60,6 +62,12 @@ app.use('/getcountries', getCountries())
 
 // getGoods 模块路由
 app.use('/getgoods', getGoods())
+
+// register 模块路由
+app.use('/register', register())
+
+// login 模块路由
+app.use('/login', login())
 
 // users 模块路由
 app.use('/users', users())
