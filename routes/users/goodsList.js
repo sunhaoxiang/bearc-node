@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
 const jwt = require('../../jwt/jwt')
 const goods = require('../../models/goods')
 
@@ -57,6 +59,10 @@ module.exports = function () {
         }
       }
     })
+  })
+
+  router.post('/add', (req, res, next) => {
+
   })
 
   return router
