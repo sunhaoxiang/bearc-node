@@ -22,6 +22,7 @@ const http = require('http')
 const url = require('url')
 const querystring = require('querystring')
 const express = require('express')
+const expressStatic = require('express-static')
 const db = require('./db/db')
 const bodyParser = require('body-parser')
 const { port } = require('./config/config')
@@ -56,6 +57,9 @@ app.all('*', function(req, res, next) {
 
 // 解析POST数据
 app.use(bodyParser.json())
+
+// 静态文件 
+app.use('/upload', expressStatic('upload'))
 
 // getCountries 模块路由
 app.use('/getcountries', getCountries())
