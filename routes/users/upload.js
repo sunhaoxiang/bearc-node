@@ -10,7 +10,7 @@ module.exports = function () {
   router.post('/', upload.single('image'), (req, res, next) => {
     let newPath = req.file.path + path.parse(req.file.originalname).ext
     // 为上传的文件加上扩展名
-    fs.rename(req.file.path, newName, (err) => {
+    fs.rename(req.file.path, newPath, (err) => {
       if (err) {
         res.json({
           status: -1,
