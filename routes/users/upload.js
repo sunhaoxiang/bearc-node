@@ -17,7 +17,6 @@ const upload = multer({
     } else {
       cb(null, true)
     }
-
   }
 }).single('image')
 
@@ -26,7 +25,7 @@ module.exports = function () {
   router.post('/', (req, res, next) => {
     upload(req, res, (err) => {
       if (err) {
-        console.log('Upload error.')
+        res.sendStatus(403)
       } else {
         let newPath = req.file.path + path.parse(req.file.originalname).ext
         // 为上传的文件加上扩展名
