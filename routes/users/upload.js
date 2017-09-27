@@ -2,6 +2,7 @@ const fs =require('fs')
 const path = require('path')
 const express = require('express')
 const router = express.Router()
+const { localUrl } = require('../../config/config')
 const jwt = require('../../jwt/jwt')
 const multer = require('multer')
 const upload = multer({
@@ -40,7 +41,7 @@ module.exports = function () {
               status: 1,
               msg: '',
               result: {
-                path: newPath
+                path: `${localUrl + newPath}`
               }
             })
           }

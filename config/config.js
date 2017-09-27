@@ -1,4 +1,5 @@
 const port = 9999
+const localUrl = 'localhost:9999'
 const dbUrl = 'mongodb://127.0.0.1:27017/bearc'
 const jwtSecretKey = 'secret'
 const jwtExpiresIn = '1h'
