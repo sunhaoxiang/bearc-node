@@ -50,7 +50,7 @@ module.exports = function () {
               status: 1,
               msg: '',
               result: {
-                path: `${localUrl + newPath}`
+                path: `${localUrl}/${newPath}`
               }
             })
           }
