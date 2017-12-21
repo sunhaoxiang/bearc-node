@@ -47,7 +47,7 @@ module.exports = function () {
             })
           } else {
             res.json({
-              status: 1,
+              status: 0,
               msg: '',
               result: {
                 path: `${localUrl}/${newPath}`

@@ -15,14 +15,14 @@ module.exports = function () {
       } else {
         if (doc.length === 0) {
           res.json({
-            status: 2,
+            status: -1,
             msg: '账号不存在'
           })
         } else {
           let password = md5(req.body.password)
           if (password !== doc[0].password) {
             res.json({
-              status: 3,
+              status: -1,
               msg: '密码错误'
             })
           } else {

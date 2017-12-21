@@ -7,7 +7,7 @@ module.exports = function () {
     let verifyToken = jwt.verify(req.body.token)
     if (verifyToken === 'invalid') {
       res.json({
-        status: 4,
+        status: -1,
         msg: '登录超时'
       })
     } else {

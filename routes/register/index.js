@@ -14,14 +14,14 @@ module.exports = function () {
       } else {
         if (doc.length !== 0) {
           res.json({
-            status: 6,
+            status: -1,
             msg: '账号已存在'
           })
         } else {
           let password = md5(req.body.password)
           users().create({username: req.body.username, password: password}, (err) => {
             res.json({
-              status: 5,
+              status: 0,
               msg: '注册成功'
             })
           })
