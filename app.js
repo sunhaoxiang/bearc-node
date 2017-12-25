@@ -23,6 +23,7 @@ const url = require('url')
 const querystring = require('querystring')
 const express = require('express')
 const expressStatic = require('express-static')
+const helmet = require('helmet')
 const db = require('./db/db')
 const bodyParser = require('body-parser')
 const { port } = require('./config/config')
@@ -37,6 +38,9 @@ const app = express()
 app.listen(port, () => {
   console.log('Bearc service startup.')
 })
+
+// Header保护
+app.use(helmet())
 
 // 连接数据库
 db()
