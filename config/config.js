@@ -7,8 +7,8 @@ const passwordSecretKey = 'secret'
 
 module.exports = {
   port,
-  dbUrl,
   localUrl,
+  dbUrl,
   jwtSecretKey,
   jwtExpiresIn,
   passwordSecretKey
