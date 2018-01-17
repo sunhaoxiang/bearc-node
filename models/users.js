@@ -5,5 +5,5 @@ const usersSchema = new mongoose.Schema({
 })
 
 module.exports = function () {
-  return mongoose.model('users', usersSchema, 'users')
+  return mongoose.model('users', usersSchema)
 }

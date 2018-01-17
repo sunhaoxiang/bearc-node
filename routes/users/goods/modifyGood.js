@@ -21,7 +21,7 @@ module.exports = function () {
         productPrice: req.body.productPrice,
         productCountry: req.body.productCountry,
         productClass: req.body.productClass
-      }, (err, doc) => {
+      }, (err) => {
         if (err) {
           res.json({
             status: -1,
@@ -43,9 +43,7 @@ module.exports = function () {
               status: 1,
               msg: '修改成功',
               result: {
-                newToken: newToken,
-                count: doc.length,
-                list: doc
+                newToken: newToken
               }
             })
           }

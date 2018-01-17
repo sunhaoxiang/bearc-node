@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const { dbUrl } = require('../config/config')
 
 module.exports = function () {
+  mongoose.Promise = global.Promise
   // 连接MongoDB数据库
   mongoose.connect(dbUrl, {useMongoClient: true})
   // 连接成功
