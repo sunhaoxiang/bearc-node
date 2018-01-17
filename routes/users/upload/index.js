@@ -2,8 +2,8 @@ const fs =require('fs')
 const path = require('path')
 const express = require('express')
 const router = express.Router()
-const { localUrl } = require('../../config/config')
-const jwt = require('../../jwt/jwt')
+const { localUrl } = require('../../../config/config')
+const jwt = require('../../../jwt/jwt')
 const multer = require('multer')
 const upload = multer({
   // 上传路径

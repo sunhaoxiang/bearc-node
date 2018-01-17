@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const jwt = require('../../jwt/jwt')
+const jwt = require('../../../jwt/jwt')
 
 module.exports = function () {
   router.post('/', (req, res, next) =>{
