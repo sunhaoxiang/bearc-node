@@ -20,7 +20,7 @@ module.exports = function () {
         purchasePrice: req.body.purchasePrice,
         productPrice: req.body.productPrice,
         productCountry: req.body.productCountry,
-        productClass: req.body.productClass
+        productType: req.body.productType
       }, (err) => {
         if (err) {
           res.json({

@@ -19,7 +19,7 @@ module.exports = function () {
         purchasePrice: 1,
         productPrice: 1,
         productCountry: 1,
-        productClass: 1
+        productType: 1
       }, (err, doc) => {
         if (err) {
           res.json({
