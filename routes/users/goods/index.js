@@ -16,7 +16,7 @@ module.exports = function () {
   router.use('/modifygood', modifyGood())
 
   // 删除商品
-  router.use('/removeGood', removeGood())
+  router.use('/removegood', removeGood())
 
   return router
 }

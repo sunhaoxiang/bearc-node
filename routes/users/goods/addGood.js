@@ -6,6 +6,7 @@ const goods = require('../../../models/goods')
 module.exports = function () {
   // 添加商品
   router.post('/', (req, res, next) =>{
+    console.log('1111')
     let verifyToken = jwt.verify(req.body.token)
     if (verifyToken === 'invalid') {
       res.json({
