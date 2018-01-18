@@ -4,7 +4,7 @@ const jwt = require('../../../jwt/jwt')
 const goods = require('../../../models/goods')
 
 module.exports = function () {
-  // 修改商品
+  // 添加商品
   router.post('/', (req, res, next) =>{
     let verifyToken = jwt.verify(req.body.token)
     if (verifyToken === 'invalid') {
@@ -32,14 +32,14 @@ module.exports = function () {
           if (remainTime > 900) {
             res.json({
               status: 0,
-              msg: '修改成功',
+              msg: '添加成功',
             })
           // 否则更新token
           } else {
             let newToken = jwt.sign(verifyToken.username)
             res.json({
               status: 1,
-              msg: '修改成功',
+              msg: '添加成功',
               result: {
                 newToken: newToken
               }

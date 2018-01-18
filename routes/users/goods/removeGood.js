@@ -4,23 +4,18 @@ const jwt = require('../../../jwt/jwt')
 const goods = require('../../../models/goods')
 
 module.exports = function () {
-  // 商品列表
-  router.get('/', (req, res, next) =>{
-    let verifyToken = jwt.verify(req.query.token)
+  // 删除商品
+  router.post('/', (req, res, next) =>{
+    let verifyToken = jwt.verify(req.body.token)
     if (verifyToken === 'invalid') {
       res.json({
         status: -1,
         msg: '登录超时'
       })
     } else {
-      goods().find({}, {
-        _id: 1,
-        productName: 1,
-        purchasePrice: 1,
-        productPrice: 1,
-        productCountry: 1,
-        productClass: 1
-      }, (err, doc) => {
+      goods().remove({
+        _id: req.body._id
+      }, (err) => {
         if (err) {
           res.json({
             status: -1,
@@ -33,22 +28,16 @@ module.exports = function () {
           if (remainTime > 900) {
             res.json({
               status: 0,
-              msg: '查询成功',
-              result: {
-                count: doc.length,
-                list: doc
-              }
+              msg: '删除成功',
             })
           // 否则更新token
           } else {
             let newToken = jwt.sign(verifyToken.username)
             res.json({
               status: 1,
-              msg: '查询成功',
+              msg: '删除成功',
               result: {
-                newToken: newToken,
-                count: doc.length,
-                list: doc
+                newToken: newToken
               }
             })
           }
