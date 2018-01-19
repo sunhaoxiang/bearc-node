@@ -7,7 +7,7 @@ const { statusHandler, statusTokenHandler } = require('../../../lib/statusHandle
 module.exports = function () {
   // 删除国家
   router.post('/', (req, res, next) =>{
-    let verifyToken = jwt.verify(req.headers.token)
+    let verifyToken = jwt.verify(req.body.token)
     if (verifyToken === 'invalid') {
       statusHandler(res, -1, '登录超时')
     } else {

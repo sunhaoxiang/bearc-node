@@ -14,7 +14,7 @@ const upload = multer({
     fileSize: 2 * 1024 * 1024,
   },
   fileFilter: (req, file, cb) => {
-    let verifyToken = jwt.verify(req.headers.token)
+    let verifyToken = jwt.verify(req.body.token)
     // 文件上传前验证token
     if (verifyToken === 'invalid') {
       cb(null, false)
