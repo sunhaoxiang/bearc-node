@@ -7,7 +7,7 @@ const { statusHandler, statusTokenHandler } = require('../../../lib/statusHandle
 module.exports = function () {
   // 分类列表
   router.get('/', (req, res, next) =>{
-    let verifyToken = jwt.verify(req.params.token)
+    let verifyToken = jwt.verify(req.query.token)
     if (verifyToken === 'invalid') {
       statusHandler(res, -1, '登录超时')
     } else {
