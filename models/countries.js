@@ -4,5 +4,5 @@ const countrySchema = new mongoose.Schema({
 })
 
 module.exports = function () {
-  return mongoose.model('countres', countrySchema)
+  return mongoose.model('countries', countrySchema)
 }

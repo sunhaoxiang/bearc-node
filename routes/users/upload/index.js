@@ -4,6 +4,7 @@ const express = require('express')
 const router = express.Router()
 const { localUrl } = require('../../../config/config')
 const jwt = require('../../../jwt/jwt')
+const { statusHandler, statusTokenHandler } = require('../../../lib/statusHandler')
 const multer = require('multer')
 const upload = multer({
   // 上传路径
@@ -41,17 +42,10 @@ module.exports = function () {
         // 为上传的文件加上扩展名
         fs.rename(req.file.path, newPath, (err) => {
           if (err) {
-            res.json({
-              status: -1,
-              msg: err.message
-            })
+            statusHandler(res, -1, err.message)
           } else {
-            res.json({
-              status: 0,
-              msg: '',
-              result: {
-                path: `${localUrl}/${newPath}`
-              }
+            statusHandler(res, 0, '上传成功', {
+              path: `${localUrl}/${newPath}`
             })
           }
         })
