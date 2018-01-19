@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const verifyToken = require('./verifyToken')
-const goods = require('./goods')
 const upload = require('./upload')
+const goods = require('./goods')
+const types = require('./types')
 
 module.exports = function () {
   // 验证token
@@ -13,6 +14,9 @@ module.exports = function () {
 
   // 商品模块
   router.use('/goods', goods())
+
+  // 分类模块
+  router.use('/types', types())
 
   return router
 }
