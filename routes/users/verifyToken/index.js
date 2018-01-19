@@ -4,7 +4,7 @@ const jwt = require('../../../jwt/jwt')
 
 module.exports = function () {
   router.post('/', (req, res, next) =>{
-    let verifyToken = jwt.verify(req.body.token)
+    let verifyToken = jwt.verify(req.headers.token)
     if (verifyToken === 'invalid') {
       res.json({
         status: -1,

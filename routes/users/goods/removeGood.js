@@ -6,7 +6,7 @@ const goods = require('../../../models/goods')
 module.exports = function () {
   // 删除商品
   router.post('/', (req, res, next) =>{
-    let verifyToken = jwt.verify(req.body.token)
+    let verifyToken = jwt.verify(req.headers.token)
     if (verifyToken === 'invalid') {
       res.json({
         status: -1,

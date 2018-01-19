@@ -6,7 +6,7 @@ const goods = require('../../../models/goods')
 module.exports = function () {
   // 商品列表
   router.get('/', (req, res, next) =>{
-    let verifyToken = jwt.verify(req.query.token)
+    let verifyToken = jwt.verify(req.headers.token)
     if (verifyToken === 'invalid') {
       res.json({
         status: -1,
