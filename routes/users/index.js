@@ -4,6 +4,7 @@ const verifyToken = require('./verifyToken')
 const upload = require('./upload')
 const goods = require('./goods')
 const types = require('./types')
+const countries = require('./countries')
 
 module.exports = function () {
   // 验证token
@@ -17,6 +18,9 @@ module.exports = function () {
 
   // 分类模块
   router.use('/types', types())
+
+  // 国家模块
+  router.use('/countries', types())
 
   return router
 }
