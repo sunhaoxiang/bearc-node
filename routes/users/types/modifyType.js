@@ -2,16 +2,14 @@ const express = require('express')
 const router = express.Router()
 const jwt = require('../../../jwt/jwt')
 const types = require('../../../models/types')
+const { statusHandler, statusTokenHandler } = require('../../../lib/statusHandler')
 
 module.exports = function () {
   // 修改分类
   router.post('/', (req, res, next) =>{
     let verifyToken = jwt.verify(req.headers.token)
     if (verifyToken === 'invalid') {
-      res.json({
-        status: -1,
-        msg: '登录超时'
-      })
+      statusHandler(res, -1, '登录超时')
     } else {
       types().update({
         _id: req.body._id
@@ -19,30 +17,9 @@ module.exports = function () {
         type: req.body.type
       }, (err) => {
         if (err) {
-          res.json({
-            status: -1,
-            msg: err.message
-          })
+          statusHandler(res, -1, err.message)
         } else {
-          // token剩余时间
-          let remainTime = verifyToken.exp - Math.round(new Date() / 1000)
-          // 如果token剩余时间大于15分钟，则不更新token
-          if (remainTime > 900) {
-            res.json({
-              status: 0,
-              msg: '修改成功',
-            })
-          // 否则更新token
-          } else {
-            let newToken = jwt.sign(verifyToken.username)
-            res.json({
-              status: 1,
-              msg: '修改成功',
-              result: {
-                newToken: newToken
-              }
-            })
-          }
+          statusTokenHandler(res, verifyToken, '修改成功')
         }
       })
     }
