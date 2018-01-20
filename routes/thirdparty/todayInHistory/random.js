@@ -6,16 +6,21 @@ const jwt = require('../../../jwt/jwt')
 const { statusHandler, statusTokenHandler } = require('../../../lib/statusHandler')
 
 module.exports = function () {
+  // 随机获得历史上的今天数据
   router.get('/', (req, res, next) =>{
     let verifyToken = jwt.verify(req.query.token)
     if (verifyToken === 'invalid') {
       statusHandler(res, -1, '登录超时')
     } else {
+      let now = new Date()
+      let nowMonth = now.getMonth() + 1
+      let nowDate = now.getDate()
+      let date = `${nowMonth}/${nowDate}`
       request({
         url: 'http://v.juhe.cn/todayOnhistory/queryEvent.php',
         qs: {
           key: todayInHistoryAppKey,
-          date: '1/20'
+          date
         }
       }, (err, response, body) => {
         if (err) {
@@ -23,7 +28,8 @@ module.exports = function () {
         } else {
           let sendData = JSON.parse(body)
           if (sendData.error_code === 0) {
-            statusTokenHandler(res, verifyToken, sendData.reason, sendData.result)
+            let index = Math.floor(Math.random()*sendData.result.length)
+            statusTokenHandler(res, verifyToken, sendData.reason, sendData.result[index])
           } else {
             statusHandler(res, -1, sendData.reason)
           }
