@@ -20,7 +20,7 @@ module.exports = function () {
   router.use('/types', types())
 
   // 国家模块
-  router.use('/countries', types())
+  router.use('/countries', countries())
 
   return router
 }
