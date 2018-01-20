@@ -4,7 +4,7 @@ const { dbUrl } = require('../config/config')
 module.exports = function () {
   mongoose.Promise = global.Promise
   // 连接MongoDB数据库
-  mongoose.connect(dbUrl, {useMongoClient: true})
+  mongoose.connect(dbUrl)
   // 连接成功
   mongoose.connection.on('connected', () => {
     console.log('MongoDB connected success.')

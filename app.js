@@ -22,7 +22,6 @@ const http = require('http')
 const url = require('url')
 const querystring = require('querystring')
 const express = require('express')
-const expressStatic = require('express-static')
 const helmet = require('helmet')
 const db = require('./db/db')
 const bodyParser = require('body-parser')
@@ -32,6 +31,7 @@ const getGoods = require('./routes/getgoods')
 const register = require('./routes/register')
 const login = require('./routes/login')
 const users = require('./routes/users')
+const thirdparty = require('./routes/thirdparty')
 
 // 搭建服务
 const app = express()
@@ -63,7 +63,7 @@ app.all('*', function(req, res, next) {
 app.use(bodyParser.json())
 
 // 静态文件 
-app.use('/upload', expressStatic('upload'))
+app.use('/upload', express.static('upload'))
 
 // getCountries 模块路由
 app.use('/getcountries', getCountries())
@@ -79,3 +79,6 @@ app.use('/login', login())
 
 // users 模块路由
 app.use('/users', users())
+
+// 第三方模块路由
+app.use('/thirdparty', thirdparty())
