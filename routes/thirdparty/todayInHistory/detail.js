@@ -24,7 +24,6 @@ module.exports = function () {
         } else {
           let sendData = JSON.parse(body)
           if (sendData.error_code === 0) {
-            console.log(sendData.result[0])
             statusTokenHandler(res, verifyToken, sendData.reason, sendData.result[0])
           } else {
             statusHandler(res, -1, sendData.reason)
