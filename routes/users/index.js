@@ -5,6 +5,7 @@ const upload = require('./upload')
 const goods = require('./goods')
 const types = require('./types')
 const countries = require('./countries')
+const earnings = require('./earnings')
 const customers = require('./customers')
 
 module.exports = function () {
@@ -22,6 +23,9 @@ module.exports = function () {
 
   // 国家模块
   router.use('/countries', countries())
+
+  // 收入模块
+  router.use('/earnings', earnings())
 
   // 客户模块
   router.use('/customers', customers())
