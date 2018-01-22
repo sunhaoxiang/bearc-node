@@ -1,16 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const jwt = require('../../../jwt/jwt')
 const types = require('../../../models/types')
 const { statusHandler, statusTokenHandler } = require('../../../lib/statusHandler')
+const { verifyTokenGetHandler } = require('../../../lib/verifyTokenHandler')
 
 module.exports = function () {
   // 分类列表
   router.get('/', (req, res, next) =>{
-    let verifyToken = jwt.verify(req.query.token)
-    if (verifyToken === 'invalid') {
-      statusHandler(res, -1, '登录超时')
-    } else {
+    verifyTokenGetHandler(req, res, next, (verifyToken) => {
       types().find({}, {
         _id: 1,
         type: 1
@@ -24,7 +21,7 @@ module.exports = function () {
           })
         }
       })
-    }
+    })
   })
 
   return router

@@ -1,16 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const jwt = require('../../../jwt/jwt')
 const types = require('../../../models/types')
 const { statusHandler, statusTokenHandler } = require('../../../lib/statusHandler')
+const { verifyTokenPostHandler } = require('../../../lib/verifyTokenHandler')
 
 module.exports = function () {
   // 删除分类
   router.post('/', (req, res, next) =>{
-    let verifyToken = jwt.verify(req.body.token)
-    if (verifyToken === 'invalid') {
-      statusHandler(res, -1, '登录超时')
-    } else {
+    verifyTokenPostHandler(req, res, next, (verifyToken) => {
       types().remove({
         _id: req.body._id
       }, (err) => {
@@ -20,7 +17,7 @@ module.exports = function () {
           statusTokenHandler(res, verifyToken, '删除成功')
         }
       })
-    }
+    })
   })
 
   return router

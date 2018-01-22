@@ -2,16 +2,13 @@ const express = require('express')
 const router = express.Router()
 const request = require('request')
 const { todayInHistoryAppKey } = require('../../../config/config')
-const jwt = require('../../../jwt/jwt')
 const { statusHandler, statusTokenHandler } = require('../../../lib/statusHandler')
+const { verifyTokenGetHandler } = require('../../../lib/verifyTokenHandler')
 
 module.exports = function () {
   // 获得某条历史上的今天详细数据
   router.get('/', (req, res, next) =>{
-    let verifyToken = jwt.verify(req.query.token)
-    if (verifyToken === 'invalid') {
-      statusHandler(res, -1, '登录超时')
-    } else {
+    verifyTokenGetHandler(req, res, next, (verifyToken) => {
       request({
         url: 'http://v.juhe.cn/todayOnhistory/queryDetail.php',
         qs: {
@@ -30,7 +27,7 @@ module.exports = function () {
           }
         }
       })
-    }
+    })
   })
 
   return router

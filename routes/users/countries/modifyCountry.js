@@ -1,16 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const jwt = require('../../../jwt/jwt')
 const countries = require('../../../models/countries')
 const { statusHandler, statusTokenHandler } = require('../../../lib/statusHandler')
+const { verifyTokenPostHandler } = require('../../../lib/verifyTokenHandler')
 
 module.exports = function () {
   // 修改国家
   router.post('/', (req, res, next) =>{
-    let verifyToken = jwt.verify(req.body.token)
-    if (verifyToken === 'invalid') {
-      statusHandler(res, -1, '登录超时')
-    } else {
+    verifyTokenPostHandler(req, res, next, (verifyToken) => {
       countries().update({
         _id: req.body._id
       }, {
@@ -22,7 +19,7 @@ module.exports = function () {
           statusTokenHandler(res, verifyToken, '修改成功')
         }
       })
-    }
+    })
   })
 
   return router
