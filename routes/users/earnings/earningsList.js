@@ -14,6 +14,7 @@ module.exports = function () {
         purchasePrice: 1,
         productPrice: 1,
         sellNumber: 1,
+        expressFee: 1,
         customerName: 1,
         sellDate: 1
       }, (err, doc) => {

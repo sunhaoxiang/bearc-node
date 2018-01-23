@@ -4,6 +4,7 @@ const earningSchema = new mongoose.Schema({
   purchasePrice: Number,
   productPrice: Number,
   sellNumber: Number,
+  expressFee: Number,
   customerName: String,
   sellDate: Date
 })

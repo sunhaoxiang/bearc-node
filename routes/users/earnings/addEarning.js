@@ -13,6 +13,7 @@ module.exports = function () {
         purchasePrice: req.body.purchasePrice,
         productPrice: req.body.productPrice,
         sellNumber: req.body.sellNumber,
+        expressFee: req.body.expressFee,
         customerName: req.body.customerName,
         sellDate: req.body.sellDate
       }, (err) => {
