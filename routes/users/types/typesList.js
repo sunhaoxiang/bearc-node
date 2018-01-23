@@ -24,5 +24,23 @@ module.exports = function () {
     })
   })
 
+  router.get('/select', (req, res, next) =>{
+    verifyTokenGetHandler(req, res, next, (verifyToken) => {
+      types().find({}, {
+        _id: 1,
+        type: 1
+      }, (err, doc) => {
+        if (err) {
+          statusHandler(res, -1, err.message)
+        } else {
+          statusTokenHandler(res, verifyToken, '查询成功', {
+            count: doc.length,
+            list: doc
+          })
+        }
+      })
+    })
+  })
+
   return router
 }
