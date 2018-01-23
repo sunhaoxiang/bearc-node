@@ -8,21 +8,30 @@ module.exports = function () {
   // 商品列表
   router.get('/', (req, res, next) =>{
     verifyTokenGetHandler(req, res, next, (verifyToken) => {
-      goods().find({}, {
-        _id: 1,
-        productName: 1,
-        purchasePrice: 1,
-        productPrice: 1,
-        productCountry: 1,
-        productType: 1
-      }, (err, doc) => {
+      goods().find((err, doc) => {
         if (err) {
           statusHandler(res, -1, err.message)
         } else {
-          statusTokenHandler(res, verifyToken, '查询成功', {
-            count: doc.length,
-            list: doc
-          })
+          let count = doc.length
+          let limit = Number(req.query.size) || 10
+          let skip = (Number(req.query.current) - 1) * limit || 0
+          goods().find({}, {
+            _id: 1,
+            productName: 1,
+            purchasePrice: 1,
+            productPrice: 1,
+            productCountry: 1,
+            productType: 1
+          }, (err, doc) => {
+            if (err) {
+              statusHandler(res, -1, err.message)
+            } else {
+              statusTokenHandler(res, verifyToken, '查询成功', {
+                count,
+                list: doc
+              })
+            }
+          }).skip(skip).limit(limit)
         }
       })
     })
