@@ -10,10 +10,17 @@ module.exports = {
   // 验证token
   verify (token) {
     try {
-      let username = jwt.verify(token, jwtSecretKey)
-      return username
+      let verifyToken = jwt.verify(token, jwtSecretKey)
+      return {
+        status: 0,
+        message: 'valid',
+        verifyToken
+      }
     } catch (err) {
-      return 'invalid'
+      return {
+        status: -1,
+        message: 'invalid'
+      }
     }
   }
 }

@@ -14,12 +14,9 @@ const upload = multer({
     fileSize: 2 * 1024 * 1024,
   },
   fileFilter: (req, file, cb) => {
-    let verifyToken = jwt.verify(req.body.token)
+    let verifyTokenResult = jwt.verify(req.body.token)
     // 文件上传前验证token
-    if (verifyToken === 'invalid') {
-      cb(null, false)
-      cb(new Error())
-    } else {
+    if (verifyTokenResult.status === 0) {
       // 限制上传文件类型
       if (file.mimetype === 'image/gif' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png') {
         cb(null, true)
@@ -27,6 +24,9 @@ const upload = multer({
         cb(null, false)
         cb(new Error())
       }
+    } else {
+      cb(null, false)
+      cb(new Error())
     }
   }
 }).single('image')
