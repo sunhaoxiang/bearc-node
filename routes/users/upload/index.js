@@ -14,7 +14,7 @@ const upload = multer({
     fileSize: 2 * 1024 * 1024,
   },
   fileFilter: (req, file, cb) => {
-    let verifyTokenResult = jwt.verify(req.body.token)
+    let verifyTokenResult = jwt.verify(req.headers.token)
     // 文件上传前验证token
     if (verifyTokenResult.status === 0) {
       // 限制上传文件类型
