@@ -42,7 +42,7 @@ module.exports = function () {
         // 为上传的文件加上扩展名
         fs.rename(req.file.path, newPath, (err) => {
           if (err) {
-            statusHandler(res, -1, err.message)
+            statusHandler(res, 500, err.message)
           } else {
             statusHandler(res, 0, '上传成功', {
               path: `${localUrl}/${newPath}`

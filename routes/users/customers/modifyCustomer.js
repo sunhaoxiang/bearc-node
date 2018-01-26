@@ -16,7 +16,7 @@ module.exports = function () {
         customerAddress: req.body.customerAddress
       }, (err) => {
         if (err) {
-          statusHandler(res, -1, err.message)
+          statusHandler(res, 500, err.message)
         } else {
           statusTokenHandler(res, verifyToken, '修改成功')
         }

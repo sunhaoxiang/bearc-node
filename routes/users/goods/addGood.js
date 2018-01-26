@@ -16,7 +16,7 @@ module.exports = function () {
         productType: req.body.productType
       }, (err) => {
         if (err) {
-          statusHandler(res, -1, err.message)
+          statusHandler(res, 500, err.message)
         } else {
           statusTokenHandler(res, verifyToken, '添加成功')
         }

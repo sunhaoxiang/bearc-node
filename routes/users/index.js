@@ -7,6 +7,7 @@ const types = require('./types')
 const countries = require('./countries')
 const earnings = require('./earnings')
 const customers = require('./customers')
+const modifyPassword = require('./modifyPassword')
 
 module.exports = function () {
   // 验证token
@@ -29,6 +30,9 @@ module.exports = function () {
 
   // 客户模块
   router.use('/customers', customers())
+
+  // 修改密码模块
+  router.use('/modifypassword', modifyPassword())
 
   return router
 }

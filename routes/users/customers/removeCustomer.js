@@ -12,7 +12,7 @@ module.exports = function () {
         _id: req.body._id
       }, (err) => {
         if (err) {
-          statusHandler(res, -1, err.message)
+          statusHandler(res, 500, err.message)
         } else {
           statusTokenHandler(res, verifyToken, '删除成功')
         }
