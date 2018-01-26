@@ -8,11 +8,10 @@ module.exports = function () {
   // 商品列表
   router.get('/', (req, res, next) =>{
     verifyTokenGetHandler(req, res, next, (verifyToken) => {
-      goods().find((err, doc) => {
+      goods().count((err, count) => {
         if (err) {
           statusHandler(res, -1, err.message)
         } else {
-          let count = doc.length
           let limit = Number(req.query.size) || 10
           let skip = (Number(req.query.current) - 1) * limit || 0
           goods().find({}, {
