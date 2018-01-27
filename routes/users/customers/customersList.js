@@ -8,13 +8,18 @@ module.exports = function () {
   // 客户列表
   router.get('/', (req, res, next) =>{
     verifyTokenGetHandler(req, res, next, (verifyToken) => {
-      customers().count((err, count) => {
+      let qs = new RegExp(req.query.search)
+      customers().count({
+        customerName: qs
+      }, (err, count) => {
         if (err) {
           statusHandler(res, 500, err.message)
         } else {
           let limit = Number(req.query.size) || 10
           let skip = (Number(req.query.current) - 1) * limit || 0
-          customers().find({}, {
+          customers().find({
+            customerName: qs
+          }, {
             _id: 1,
             customerName: 1,
             customerPhone: 1,
