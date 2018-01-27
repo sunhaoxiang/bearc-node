@@ -21,14 +21,14 @@ module.exports = function () {
         }
       }, (err, response, body) => {
         if (err) {
-          statusHandler(res, -1, err)
+          statusHandler(res, 500, err)
         } else {
           let sendData = JSON.parse(body)
           if (sendData.error_code === 0) {
             let index = Math.floor(Math.random()*sendData.result.length)
             statusTokenHandler(res, verifyToken, sendData.reason, sendData.result[index])
           } else {
-            statusHandler(res, -1, sendData.reason)
+            statusHandler(res, 500, sendData.reason)
           }
         }
       })

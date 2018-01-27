@@ -8,8 +8,6 @@ const { verifyTokenPostHandler } = require('../../../lib/verifyTokenHandler')
 module.exports = function () {
   router.post('/', (req, res, next) => {
     verifyTokenPostHandler(req, res, next, (verifyToken) => {
-      // console.log(req.body.oldPassword)
-      // console.log(req.body.newPassword)
       users().find({username: verifyToken.username}, (err, doc) => {
         if (err) {
           statusHandler(res, 500, err.message)
@@ -17,9 +15,9 @@ module.exports = function () {
           let oldPassword = md5(req.body.oldPassword)
           let newPassword = md5(req.body.newPassword)
           if (doc.length === 0) {
-            statusHandler(res, 500, '账号不存在')
+            statusHandler(res, 401, 'invalid')
           } else if (doc[0].password !== oldPassword) {
-            statusHandler(res, 500, '旧密码错误')
+            statusHandler(res, -1, '旧密码错误')
           } else {
             users().update({
               username: verifyToken.username

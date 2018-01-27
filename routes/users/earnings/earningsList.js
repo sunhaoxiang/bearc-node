@@ -51,7 +51,7 @@ module.exports = function () {
         sellDate: 1
       }, (err, doc) => {
         if (err) {
-          statusHandler(res, -1, err.message)
+          statusHandler(res, 500, err.message)
         } else {
           statusTokenHandler(res, verifyToken, '查询成功', {
             count: doc.length,

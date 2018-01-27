@@ -9,7 +9,7 @@ module.exports = function () {
   router.post('/', (req, res, next) => {
     users().find({username: req.body.username}, (err, doc) => {
       if (err) {
-        statusHandler(res, -1, err.message)
+        statusHandler(res, 500, err.message)
       } else {
         if (doc.length === 0) {
           statusHandler(res, -1, '账号不存在')

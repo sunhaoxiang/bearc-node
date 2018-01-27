@@ -18,7 +18,7 @@ module.exports = {
       }
     } catch (err) {
       return {
-        status: -1,
+        status: 401,
         message: 'invalid'
       }
     }
