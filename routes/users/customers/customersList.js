@@ -39,6 +39,7 @@ module.exports = function () {
     })
   })
 
+  // select
   router.get('/select', (req, res, next) =>{
     verifyTokenGetHandler(req, res, next, (verifyToken) => {
       customers().find({}, {
