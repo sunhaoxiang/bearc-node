@@ -8,7 +8,7 @@ module.exports = function () {
   // 商品列表
   router.get('/', (req, res, next) =>{
     verifyTokenGetHandler(req, res, next, (verifyToken) => {
-      let qs = new RegExp(req.query.search)
+      let qs = new RegExp(req.query.search, 'i')
       goods().count({
         productName: qs
       }, (err, count) => {
