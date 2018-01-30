@@ -40,5 +40,32 @@ module.exports = function () {
     })
   })
 
+  router.get('/statistics', (req, res, next) =>{
+    verifyTokenGetHandler(req, res, next, (verifyToken) => {
+      earnings().find({
+        sellDate: {
+          $gte: req.query.startDate,
+          $lte: req.query.endDate
+        }
+      }, {
+        _id: 1,
+        productName: 1,
+        purchasePrice: 1,
+        productPrice: 1,
+        sellNumber: 1,
+        expressFee: 1
+      }, (err, doc) => {
+        if (err) {
+          statusHandler(res, 500, err.message)
+        } else {
+          statusTokenHandler(res, verifyToken, '查询成功', {
+            count: doc.length,
+            list: doc
+          })
+        }
+      })
+    })
+  })
+
   return router
 }
