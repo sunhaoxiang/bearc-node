@@ -66,10 +66,10 @@ app.use(bodyParser.json())
 app.use('/upload', express.static('upload'))
 
 // getCountries 模块路由
-app.use('/getcountries', getCountries())
+// app.use('/getcountries', getCountries())
 
 // getGoods 模块路由
-app.use('/getgoods', getGoods())
+// app.use('/getgoods', getGoods())
 
 // register 模块路由
 app.use('/register', register())
