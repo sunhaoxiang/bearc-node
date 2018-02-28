@@ -40,7 +40,7 @@ module.exports = function () {
     })
   })
 
-  router.get('/statistics', (req, res, next) =>{
+  router.get('/statistics', (req, res, next) => {
     verifyTokenGetHandler(req, res, next, (verifyToken) => {
       earnings().find({
         sellDate: {

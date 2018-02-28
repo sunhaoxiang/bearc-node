@@ -47,9 +47,9 @@ db()
 
 // 允许跨域
 app.all('*', function(req, res, next) {
-  // res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With')
-  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS, token')
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With, token')
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS')
   if(req.method == 'OPTIONS') {
     /*让options请求快速返回*/
     res.sendStatus(200)
@@ -82,3 +82,15 @@ app.use('/users', users())
 
 // 第三方模块路由
 app.use('/thirdparty', thirdparty())
+
+app.get('/test', (req, res, next) => {
+  res.json({
+    get: 'ok'
+  })
+})
+
+app.post('/test', (req, res, next) => {
+  res.json({
+    post: 'ok'
+  })
+})
